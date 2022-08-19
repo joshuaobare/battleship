@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const Ship = require('./ship')
+const Ship = require('../ship')
 
 test('sink ship with 3 hits', ()=> {
     const ship = new Ship("3")
