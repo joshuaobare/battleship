@@ -1,5 +1,3 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable no-unused-vars */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
