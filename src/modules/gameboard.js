@@ -1,25 +1,43 @@
 const Ship = require("./ship")
 
-const Gameboard = function(ship,coord) {
+const Gameboard = function() {
     this.missedHit = []
-    ship.coord = coord
+    this.ships = []
+    this.occupiedSpots = []
+    
+    this.placeShip = (ship) => {
+        this.ships.push(ship)
+        ship.coord.forEach(point => {
+            this.occupiedSpots.push(point)
+        })
+        
+    }
 
     this.receiveAttack = (coords) => {
         
         
-        const coordCheck = ship.coord.some((val) => {
+        const coordCheck = this.occupiedSpots.some((val) => {
             if (val.toString() === coords.toString()) {
                 return true
             }
         })
         
         if (coordCheck)  {
-            const index = ship.coord.findIndex((val) => {
+
+            const myShip = this.ships.find((ship) => {
+
+                return ship.coord.find((coord) => {
+                    return coord.toString() === coords.toString()
+                })
+
+            })
+            
+            const index = myShip.coord.findIndex((val) => {
                 if(val.toString() === coords.toString()){
                     return true
                 }
             })
-            ship.hit(index)
+            myShip.hit(index)
             
             return "Attack hit a ship"
 
@@ -32,23 +50,33 @@ const Gameboard = function(ship,coord) {
     }
 
     this.allShipsSunk = () => {
-        if(ship.isSunk()) {
+
+        const decision = this.ships.every(ship => {
+
+           if (ship.isSunk()) {
+               return true
+           }
             
-            return "All ships have sank" 
+        })
+
+        if (decision) {
+            return "All ships have sank"
         } else {
-            
-            return "Unsure"
+            return "Some ships are afloat"
         }
+        
     }
+
 
     
 }
-
-/*function findIndex(x,y) {
+/*const ship = new Ship(3,[[2,2],[3,2],[2,5],[3,5]])
+console.log(ship.coord)
+function findIndex(x,y) {
 
     const index  = y.findIndex
 
-}*/
+}
 
 const ship = new Ship(4)
 const shipCoords = [[2,2],[3,2],[2,5],[3,5]]
@@ -60,5 +88,5 @@ gameboard.receiveAttack([3,2])
 gameboard.receiveAttack([2,5])
 console.log(gameboard.allShipsSunk())
 
-
+*/
 module.exports = Gameboard

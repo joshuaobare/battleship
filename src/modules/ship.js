@@ -1,6 +1,8 @@
-const Ship = function(length) {
+const Ship = function(length,coord) {
     this.length = length
     this.hitLocation = []
+    this.coord = coord
+    
 
     this.hit = (num) => {
         
@@ -17,8 +19,7 @@ const Ship = function(length) {
             }
         })
 
-        console.log(hitCheck)
-            console.log(this.length)
+        
         if((hitCheck) && (this.length == 0)) {
             
             return true
