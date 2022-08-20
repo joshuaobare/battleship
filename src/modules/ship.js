@@ -8,6 +8,7 @@ const Ship = function(length,coord) {
         
         this.hitLocation[num] = "X"
         this.length--
+        
         return `Ship is hit at point ${num}`
        
     }

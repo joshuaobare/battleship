@@ -6,30 +6,33 @@ const Player = function(name,gameboard) {
 
     this.attackOpponent = (coord) => {
         if(this.name === "COMPUTER" ) {
-
-            const coordChecker = (() => {
+            
+            const coordChecker = () => {
                 const randCoord = [getRandomInt(0,10),getRandomInt(0,10)]
 
-                const coordCheck = gameboard.playableSpots.some(val => {
+                const coordCheck = this.gameboard.playableSpots.some(val => {
                     if (val.toString() === randCoord.toString()) {
                         return true
                     }
                 })
 
-                if(coordCheck) {
-                    coordChecker()
+                if(!coordCheck) {
+                    this.gameboard.receiveAttack(randCoord)
                 } else {
-                    gameboard.receivedAttack(randCoord)
+                    const randCoord = [getRandomInt(0,10),getRandomInt(0,10)]
+                    this.gameboard.receiveAttack(randCoord)
                 }
 
             
-            })()
+            }
+            coordChecker()
             
 
             
         } else {
-            gameboard.receivedAttack(coord)
+            this.gameboard.receiveAttack(coord)
         }
+        return `${this.name} attacked`
         
     }
 
