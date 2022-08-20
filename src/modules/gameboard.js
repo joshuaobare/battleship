@@ -4,11 +4,24 @@ const Gameboard = function(ship,coord) {
     this.missedHit = []
     ship.coord = coord
 
-    this.receiveAttack = (coords) => {        
+    this.receiveAttack = (coords) => {
         
-        if ((ship.coord[0] === coords[0]) && (ship.coord[1] === coords[1]))  {
-            ship.hit(0)
-            return "attack hit a ship"
+        
+        const coordCheck = ship.coord.some((val) => {
+            if (val.toString() === coords.toString()) {
+                return true
+            }
+        })
+        
+        if (coordCheck)  {
+            const index = ship.coord.findIndex((val) => {
+                if(val.toString() === coords.toString()){
+                    return true
+                }
+            })
+            ship.hit(index)
+            console.log(ship.hit(index))
+            return "Attack hit a ship"
 
         } else {
             this.missedHit.push(coords)
@@ -25,8 +38,21 @@ const Gameboard = function(ship,coord) {
     
 }
 
-const ship = new Ship(5)
-const gb = new Gameboard(ship,[0,0])
-console.log(gb.receiveAttack([0,0]))
+/*function findIndex(x,y) {
+
+    const index  = y.findIndex
+
+}*/
+
+const ship = new Ship(4)
+const shipCoords = [[2,2],[3,2],[2,5],[3,5]]
+const gameboard = new Gameboard(ship,shipCoords)
+
+gameboard.receiveAttack([3,5])
+gameboard.receiveAttack([2,2])
+gameboard.receiveAttack([3,2])
+gameboard.receiveAttack([2,5])
+console.log(gameboard.allShipsSunk())
+
 
 module.exports = Gameboard

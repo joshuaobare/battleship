@@ -6,6 +6,7 @@ const Ship = function(length) {
         
         this.hitLocation[num] = "X"
         this.length--
+        return `Ship is hit at point ${num}`
        
     }
 
@@ -17,7 +18,7 @@ const Ship = function(length) {
         })
 
         if((hitCheck) && (this.length == 0)) {
-            return "Ship has sunk!"
+            return true
         } else {
             return false
         }
