@@ -6,9 +6,9 @@ const Gameboard = function() {
     this.occupiedSpots = []
     this.playableSpots = []
 
-    for(let x = 0;x<=10;x++) {
+    for(let x = 0;x<=9;x++) {
         for (let y = 0 ; y<=10 ;y++){
-            this.playableSpots.push([x,y])
+            this.playableSpots.push([y,x])
         }
     }
     
