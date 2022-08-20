@@ -17,7 +17,7 @@ const Ship = function(length) {
         })
 
         if((hitCheck) && (this.length == 0)) {
-            return true
+            return "Ship has sunk!"
         } else {
             return false
         }
