@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 2px;
+}
+.gameboards {
+    display: flex;
+    
+}
+
+/*.player-board {
+    background-color: blue;
+
+}
+
+.computer-board {
+    background-color: maroon;
+}*/
+
+.player-board , .computer-board {
+    width: 100vw;
+    height: 100vh;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    text-align: center;
+}
