@@ -2,9 +2,6 @@
 const pbSection = document.querySelector("#player-board")
 const cbSection = document.querySelector("#computer-board")
 
-
-
-
 function createGrids() {
     const pgridContainer = document.createElement("div")
     const cgridContainer = document.createElement("div")
@@ -42,9 +39,6 @@ function idGrids() {
         griditems[x].setAttribute("data-coord",`[${myArr[x]}]`)
     } 
 }    
-
-
-
 
 createGrids()
 idGrids()

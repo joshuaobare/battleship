@@ -32,3 +32,4 @@ const Ship = function(length,coord) {
 }
 
 module.exports = Ship
+
