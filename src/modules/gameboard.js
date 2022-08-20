@@ -20,7 +20,7 @@ const Gameboard = function(ship,coord) {
                 }
             })
             ship.hit(index)
-            console.log(ship.hit(index))
+            
             return "Attack hit a ship"
 
         } else {
@@ -32,7 +32,13 @@ const Gameboard = function(ship,coord) {
     }
 
     this.allShipsSunk = () => {
-        if(ship.isSunk()) return "All ships have sank"
+        if(ship.isSunk()) {
+            
+            return "All ships have sank" 
+        } else {
+            
+            return "Unsure"
+        }
     }
 
     

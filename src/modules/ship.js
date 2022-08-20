@@ -17,7 +17,10 @@ const Ship = function(length) {
             }
         })
 
+        console.log(hitCheck)
+            console.log(this.length)
         if((hitCheck) && (this.length == 0)) {
+            
             return true
         } else {
             return false
