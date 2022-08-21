@@ -1,4 +1,5 @@
-const Ship = function(name,sC,orientation) {    
+const Ship = function(name,sC,orientation) {  
+    this.name = name  
     this.orientation = orientation
     this.hitLocation = []
     
