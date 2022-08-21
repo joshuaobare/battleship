@@ -19,16 +19,16 @@ function createPlayerGrid() {
 }
 
 function placeShipGrid() {
-    const pgridContainer = document.createElement("div")
+    const plShipContainer = document.createElement("div")
     
-    pgridContainer.className = "pbSection-item"
+    plShipContainer.className = "pbSection-item"
     
     for(let x=0; x<=99 ; x++) {
         const div = document.createElement("div")
         div.className = "pb-grid-item"
-        pgridContainer.appendChild(div)
+        plShipContainer.appendChild(div)
     }
-    placeShipSection.appendChild(pgridContainer)
+    placeShipSection.appendChild(plShipContainer)
     idGrids(".pb-grid-item")
 }
 
