@@ -3,7 +3,7 @@ const Ship = require('../ship')
 const Gameboard = require("../gameboard.js")
 
 test("determines whether the attack hit a ship", () =>{
-    const ship = new Ship(4,[[2,2],[3,2],[2,5],[3,5]])
+    const ship = new Ship("battleship",[2,2],"H")
     
     const gameboard = new Gameboard()
     gameboard.placeShip(ship)
@@ -14,8 +14,8 @@ test("determines whether the attack hit a ship", () =>{
 })
 
 test("gameboard determines whether all ships have sunk", () => {
-    const ship = new Ship(2,[[0,0],[0,1]])
-    const ship2 = new Ship(2,[[2,1],[2,2]])
+    const ship = new Ship("patrol",[0,0],"V")
+    const ship2 = new Ship("patrol",[2,1],"V")
     const gameboard = new Gameboard()
     gameboard.placeShip(ship)
     gameboard.placeShip(ship2)
@@ -29,8 +29,8 @@ test("gameboard determines whether all ships have sunk", () => {
 })
 
 test("gameboard determines whether all ships have sunk", () => {
-    const ship = new Ship(2,[[0,0],[0,1]])
-    const ship2 = new Ship(2,[[2,1],[2,2]])
+    const ship = new Ship("patrol",[0,0],"V")
+    const ship2 = new Ship("patrol",[2,1],"V")
     const gameboard = new Gameboard()
     gameboard.placeShip(ship)
     gameboard.placeShip(ship2)

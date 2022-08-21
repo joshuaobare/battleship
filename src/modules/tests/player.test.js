@@ -5,8 +5,8 @@ const Gameboard = require("../gameboard.js")
 
 test("Computer attacks Gameboard", () => {
     
-    const ship = new Ship(2,[[0,0],[0,1]])
-    const ship2 = new Ship(2,[[2,1],[2,2]])
+    const ship = new Ship("patrol",[0,0],"V")
+    const ship2 = new Ship("patrol",[2,1],"V")
     const gameboard = new Gameboard()
     const player = new Player("computer",gameboard)
     gameboard.placeShip(ship)
