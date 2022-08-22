@@ -7,6 +7,8 @@ const pbSection = document.querySelector("#player-board")
 const cbSection = document.querySelector("#computer-board")
 const placeShipSection = document.querySelector("#placeShips")
 let ships = []
+let occupiedSpots = []
+let count = 0
 
 function createPlayerGrid() {
     const pgridContainer = document.createElement("div")
@@ -24,6 +26,9 @@ function createPlayerGrid() {
 }
 function orientationToggle() {
     const form = document.createElement("form")
+    const fieldset = document.createElement("fieldset")
+    const legend = document.createElement("legend")
+    legend.textContent = "Orientation"
     const toggle1 = document.createElement("div")
     const toggle2 = document.createElement("div")
     const vToggle = document.createElement("input")
@@ -37,17 +42,21 @@ function orientationToggle() {
     vToggle.type = "radio"
     vToggle.id = "V"
     vToggle.value = "V"
+    vToggle.checked = true
     vToggle.name = "orientation"
     hToggle.type = "radio"
     hToggle.id = "H"
     hToggle.value = "H"
     hToggle.name = "orientation"
+    
     toggle1.appendChild(label1)
     toggle1.appendChild(vToggle)
     toggle2.appendChild(label2)
     toggle2.appendChild(hToggle)
-    form.appendChild(toggle1)
-    form.appendChild(toggle2)
+    fieldset.appendChild(legend)
+    fieldset.appendChild(toggle1)
+    fieldset.appendChild(toggle2)
+    form.appendChild(fieldset)
     
     placeShipSection.appendChild(form)
 }
@@ -97,7 +106,8 @@ function idGrids(selector) {
     } 
 }    
 placeShipGrid()
-let count = 0
+const playerSquares = document.querySelectorAll(".ps-grid-item")
+
 /*const populatePlayerBoard = (() => {
     const patrol = new Ship("patrol",[4,3],"V")
     const submarine = new Ship("submarine",[1,1],"V")
@@ -110,10 +120,9 @@ let count = 0
     ships.push(destroyer)
     ships.push(battleship)
     ships.push(carrier)
+})()
 
-})()*/
 
-const playerSquares = document.querySelectorAll(".ps-grid-item")/*
 playerSquares.addEventListener("click", (e) => {
     count +=1
 
@@ -123,43 +132,80 @@ playerSquares.addEventListener("click", (e) => {
 
 })*/
 
+function populatePlayerBoard(){
+    //let y
 
-playerSquares.forEach(square => {
-    square.addEventListener("click", (e) => {
-        console.log(e)
-        const orientation = document.querySelector('input[name="orientation"]:checked').value
-        const coords = JSON.parse(e.target.dataset.coord)
-        let patrol,submarine, destroyer, battleship, carrier
+    ships.forEach((ship) => {
+        ship.coord.forEach((coord) => {
+            occupiedSpots.push(`[${coord}]`)
+        })
+    })
 
-        switch(count){
-            case 0:
-                patrol = new Ship("patrol",coords,orientation)
-                ships.push(patrol)
-                break
-            case 1:
-                submarine = new Ship("submarine",coords,orientation)
-                ships.push(submarine)
-                break
-            case 2:
-                destroyer = new Ship("destroyer",coords,orientation)
-                ships.push(destroyer)
-                break
-            case 3:
-                battleship = new Ship("battleship",coords,orientation)
-                ships.push(battleship)
-                break
-            case 4:
-                carrier = new Ship("carrier",coords,orientation)
-                ships.push(carrier)
-                break
-            default:
-                break
-        }
+    playerSquares.forEach(square => {
+       // console.log(square.dataset.coord)
+         occupiedSpots.forEach((coord) => {
+            if (square.dataset.coord.toString() === coord.toString()) {
+                console.log(square.dataset.coord.toString())
+                console.log(coord.toString())
+                square.style.backgroundColor = "grey"
+            }
+        })
+
+       
+    })
+
+    
+
+
+
+
+}
+
+function createShips(e){
+    const orientation = document.querySelector('input[name="orientation"]:checked').value
+    const coords = JSON.parse(e.target.dataset.coord)
+    let patrol,submarine, destroyer, battleship, carrier
+
+    switch(count){
+        case 0:
+            patrol = new Ship("patrol",coords,orientation)
+            ships.push(patrol)
+            populatePlayerBoard()
+            break
+        case 1:
+            submarine = new Ship("submarine",coords,orientation)
+            ships.push(submarine)
+            populatePlayerBoard()
+            break
+        case 2:
+            destroyer = new Ship("destroyer",coords,orientation)
+            ships.push(destroyer)
+            populatePlayerBoard()
+            break
+        case 3:
+            battleship = new Ship("battleship",coords,orientation)
+            ships.push(battleship)
+            populatePlayerBoard()
+            break
+        case 4:
+            carrier = new Ship("carrier",coords,orientation)
+            ships.push(carrier)
+            populatePlayerBoard()
+            break
+        default:
+            break
+    }
                
 
         
-        console.log(ships)
-        count +=1
+    console.log(ships)
+    count +=1
+}
+
+playerSquares.forEach(square => {
+    square.addEventListener("click", (e) => {
+        createShips(e)
+        
     },{once:true})
 })
 
