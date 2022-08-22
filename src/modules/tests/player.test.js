@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
-const Player = require("../player")
-const Ship = require('../ship')
-const Gameboard = require("../gameboard.js")
+
+import {Player} from '../player'
+import {Ship} from '../ship'
+import {Gameboard} from '../gameboard'
+
 
 test("Computer attacks Gameboard", () => {
     

@@ -89,5 +89,5 @@ const Ship = function(name,sC,orientation) {
     }
 }
 
-module.exports = Ship
+export default Ship
 

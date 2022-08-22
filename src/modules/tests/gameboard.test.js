@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const Ship = require('../ship')
-const Gameboard = require("../gameboard.js")
+import {Ship} from '../ship'
+import {Gameboard} from '../gameboard'
 
 test("determines whether the attack hit a ship", () =>{
     const ship = new Ship("battleship",[2,2],"H")

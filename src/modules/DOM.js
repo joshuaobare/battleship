@@ -1,4 +1,6 @@
 /* eslint-disable no-empty */
+import { gameLoop } from "./controller"
+
 const Player = require("./player")
 const Gameboard = require("./gameboard")
 const Ship = require("./ship")
@@ -133,7 +135,7 @@ playerSquares.addEventListener("click", (e) => {
 })*/
 
 function populatePlayerBoard(){
-    //let y
+    
 
     ships.forEach((ship) => {
         ship.coord.forEach((coord) => {
@@ -142,11 +144,8 @@ function populatePlayerBoard(){
     })
 
     playerSquares.forEach(square => {
-       // console.log(square.dataset.coord)
          occupiedSpots.forEach((coord) => {
             if (square.dataset.coord.toString() === coord.toString()) {
-                console.log(square.dataset.coord.toString())
-                console.log(coord.toString())
                 square.style.backgroundColor = "grey"
             }
         })
@@ -193,6 +192,7 @@ function createShips(e){
             populatePlayerBoard()
             break
         default:
+            gameLoop()
             break
     }
                
@@ -214,3 +214,5 @@ playerSquares.forEach(square => {
 /*
 createPlayerGrid()
 createEnemyGrid()*/
+
+export { ships }

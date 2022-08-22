@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const Ship = require('../ship')
+import {Ship} from '../ship'
 
 test('sink ship with 3 hits', ()=> {
     const ship = new Ship("submarine",[0,0],"V")

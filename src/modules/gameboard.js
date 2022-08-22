@@ -13,11 +13,14 @@ const Gameboard = function() {
     }
     
     this.placeShip = (ship) => {
+        
         this.ships.push(ship)
         ship.coord.forEach(point => {
             this.occupiedSpots.push(point)
             
         })
+
+        
         
     }
 
@@ -110,5 +113,5 @@ gameboard.receiveAttack([2,5])
 //console.log(gameboard.allShipsSunk())*/
 
 
-module.exports = Gameboard
+export default Gameboard
 

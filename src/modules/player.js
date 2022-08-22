@@ -8,7 +8,7 @@ const Player = function(name,gameboard) {
         if(this.name === "COMPUTER" ) {
             
             const coordChecker = () => {
-                const randCoord = [getRandomInt(0,10),getRandomInt(0,10)]
+                const randCoord = [getRandomInt(0,9),getRandomInt(0,9)]
 
                 const coordCheck = this.gameboard.playableSpots.some(val => {
                     if (val.toString() === randCoord.toString()) {
@@ -19,7 +19,7 @@ const Player = function(name,gameboard) {
                 if(!coordCheck) {
                     this.gameboard.receiveAttack(randCoord)
                 } else {
-                    const randCoord = [getRandomInt(0,10),getRandomInt(0,10)]
+                    const randCoord = [getRandomInt(0,9),getRandomInt(0,9)]
                     this.gameboard.receiveAttack(randCoord)
                 }
 
@@ -46,4 +46,7 @@ function getRandomInt(max,min) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-module.exports = Player
+
+
+module.exports = Player, getRandomInt
+
