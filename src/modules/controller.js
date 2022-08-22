@@ -1,9 +1,12 @@
 import { ships } from "./DOM"
 import { getRandomInt , Player } from "./player"
+import { Gameboard } from "./gameboard"
+import { Ship } from "./ship"
 
 //const Player = require("./player")
+/*
 const Gameboard = require("./gameboard")
-const Ship = require("./ship")
+const Ship = require("./ship") */
 const options = ["V","H"]
 const computerShips = []
 

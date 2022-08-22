@@ -113,5 +113,5 @@ gameboard.receiveAttack([2,5])
 //console.log(gameboard.allShipsSunk())*/
 
 
-export default Gameboard
+export {Gameboard}
 

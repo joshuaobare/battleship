@@ -89,5 +89,5 @@ const Ship = function(name,sC,orientation) {
     }
 }
 
-export default Ship
+export {Ship}
 
