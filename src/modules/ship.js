@@ -2,6 +2,7 @@ const Ship = function(name,sC,orientation) {
     this.name = name  
     this.orientation = orientation
     this.hitLocation = []
+    this.sC = sC
     
     const orStr = orientation.toString().toUpperCase()
 
@@ -10,17 +11,17 @@ const Ship = function(name,sC,orientation) {
             this.length = 2
 
             if(orStr === "H") {
-                this.coord = [sC,[sC[0]+1,sC[1]]]
+                this.coord = [this.sC,[this.sC[0]+1,this.sC[1]]]
             } else {
-                this.coord = [sC,[sC[0],sC[1]+1]]
+                this.coord = [this.sC,[this.sC[0],this.sC[1]+1]]
             }
             break
         case "SUBMARINE":
             this.length = 3
             if(orStr === "H") {
-                this.coord = [sC,[sC[0]+1,sC[1]],[sC[0]+2,sC[1]]]
+                this.coord = [this.sC,[this.sC[0]+1,this.sC[1]],[this.sC[0]+2,this.sC[1]]]
             } else {
-                this.coord = [sC,[sC[0],sC[1]+1],[sC[0],sC[1]+2]]
+                this.coord = [this.sC,[this.sC[0],this.sC[1]+1],[this.sC[0],this.sC[1]+2]]
             }
 
 
@@ -29,9 +30,9 @@ const Ship = function(name,sC,orientation) {
             this.length = 3
 
             if(orStr === "H") {
-                this.coord = [sC,[sC[0]+1,sC[1]],[sC[0]+2,sC[1]]]
+                this.coord = [this.sC,[this.sC[0]+1,this.sC[1]],[this.sC[0]+2,this.sC[1]]]
             } else {
-                this.coord = [sC,[sC[0],sC[1]+1],[sC[0],sC[1]+2]]
+                this.coord = [this.sC,[this.sC[0],this.sC[1]+1],[this.sC[0],this.sC[1]+2]]
             }
 
             break
@@ -39,9 +40,9 @@ const Ship = function(name,sC,orientation) {
             this.length = 4
 
             if(orStr === "H") {
-                this.coord = [sC,[sC[0]+1,sC[1]],[sC[0]+2,sC[1]],[sC[0]+3,sC[1]]]
+                this.coord = [this.sC,[this.sC[0]+1,this.sC[1]],[this.sC[0]+2,this.sC[1]],[this.sC[0]+3,this.sC[1]]]
             } else {
-                this.coord = [sC,[sC[0],sC[1]+1],[sC[0],sC[1]+2],[sC[0],sC[1]+3]]
+                this.coord = [this.sC,[this.sC[0],this.sC[1]+1],[this.sC[0],this.sC[1]+2],[this.sC[0],this.sC[1]+3]]
             }
 
             break
@@ -49,9 +50,9 @@ const Ship = function(name,sC,orientation) {
             this.length = 5
 
             if(orStr === "H") {
-                this.coord = [sC,[sC[0]+1,sC[1]],[sC[0]+2,sC[1]],[sC[0]+3,sC[1]],[sC[0]+4,sC[1]]]
+                this.coord = [this.sC,[this.sC[0]+1,this.sC[1]],[this.sC[0]+2,this.sC[1]],[this.sC[0]+3,this.sC[1]],[this.sC[0]+4,this.sC[1]]]
             } else {
-                this.coord = [sC,[sC[0],sC[1]+1],[sC[0],sC[1]+2],[sC[0],sC[1]+3],[sC[0],sC[1]+4]]
+                this.coord = [this.sC,[this.sC[0],this.sC[1]+1],[this.sC[0],this.sC[1]+2],[this.sC[0],this.sC[1]+3],[this.sC[0],this.sC[1]+4]]
             }
             break
         default:

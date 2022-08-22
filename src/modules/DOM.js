@@ -1,7 +1,12 @@
 /* eslint-disable no-empty */
+const Player = require("./player")
+const Gameboard = require("./gameboard")
+const Ship = require("./ship")
+
 const pbSection = document.querySelector("#player-board")
 const cbSection = document.querySelector("#computer-board")
 const placeShipSection = document.querySelector("#placeShips")
+let ships = []
 
 function createPlayerGrid() {
     const pgridContainer = document.createElement("div")
@@ -31,9 +36,11 @@ function orientationToggle() {
     label2.textContent = "Horizontal: "
     vToggle.type = "radio"
     vToggle.id = "V"
+    vToggle.value = "V"
     vToggle.name = "orientation"
     hToggle.type = "radio"
     hToggle.id = "H"
+    hToggle.value = "H"
     hToggle.name = "orientation"
     toggle1.appendChild(label1)
     toggle1.appendChild(vToggle)
@@ -89,13 +96,75 @@ function idGrids(selector) {
         griditems[x].setAttribute("data-coord",`[${myArr[x]}]`)
     } 
 }    
+placeShipGrid()
+let count = 0
+/*const populatePlayerBoard = (() => {
+    const patrol = new Ship("patrol",[4,3],"V")
+    const submarine = new Ship("submarine",[1,1],"V")
+    const destroyer = new Ship("destroyer",[1,1],"H")
+    const battleship = new Ship("battleship",[2,5],"H")
+    const carrier = new Ship("carrier",[2,5],"V")
 
-function populatePlayerBoard() {
+    /*ships.push(patrol)
+    ships.push(submarine)
+    ships.push(destroyer)
+    ships.push(battleship)
+    ships.push(carrier)
 
-}
+})()*/
+
+const playerSquares = document.querySelectorAll(".ps-grid-item")/*
+playerSquares.addEventListener("click", (e) => {
+    count +=1
+
+    if(count == 5) {
+        playerSquares.removeEventListener()
+    }
+
+})*/
+
+
+playerSquares.forEach(square => {
+    square.addEventListener("click", (e) => {
+        console.log(e)
+        const orientation = document.querySelector('input[name="orientation"]:checked').value
+        const coords = JSON.parse(e.target.dataset.coord)
+        let patrol,submarine, destroyer, battleship, carrier
+
+        switch(count){
+            case 0:
+                patrol = new Ship("patrol",coords,orientation)
+                ships.push(patrol)
+                break
+            case 1:
+                submarine = new Ship("submarine",coords,orientation)
+                ships.push(submarine)
+                break
+            case 2:
+                destroyer = new Ship("destroyer",coords,orientation)
+                ships.push(destroyer)
+                break
+            case 3:
+                battleship = new Ship("battleship",coords,orientation)
+                ships.push(battleship)
+                break
+            case 4:
+                carrier = new Ship("carrier",coords,orientation)
+                ships.push(carrier)
+                break
+            default:
+                break
+        }
+               
+
+        
+        console.log(ships)
+        count +=1
+    },{once:true})
+})
 
 
 
-placeShipGrid()/*
+/*
 createPlayerGrid()
 createEnemyGrid()*/
