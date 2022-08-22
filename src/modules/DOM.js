@@ -157,7 +157,7 @@ function populatePlayerBoard(playerSquares){
     })
 }
 
-function enemyAttackDisplay(obj,e) {
+function playerAttackDisplay(obj,e) {
     const attackedSpots = obj.attackedSpots
     const occupiedSpots = obj.occupiedSpots
 
@@ -174,8 +174,38 @@ function enemyAttackDisplay(obj,e) {
     if(coordCheck1 && coordCheck2) {
         e.target.style.backgroundColor = "red"
     } else if ((coordCheck1) && !(coordCheck2)) {
-        e.target.style.backgroundColor = "blue"
+        e.target.style.backgroundColor = "lightskyblue"
     }
+
+
+}
+
+function enemyAttackDisplay(obj) {
+
+    const missedHits = obj.missedHit
+    const hitSpots = obj.hitSpots
+    const playerSquares = document.querySelectorAll(".pb-grid-item")
+
+    playerSquares.forEach(square => {
+        missedHits.forEach((coord) => {
+           if (square.dataset.coord.toString() === `[${coord.toString()}]`) {
+               //console.log()
+               square.style.backgroundColor = "lightskyblue"
+           }
+       })
+
+      
+    })
+
+   playerSquares.forEach(square => {
+        hitSpots.forEach((coord) => {
+            if (square.dataset.coord.toString() === `[${coord.toString()}]`) {
+                square.style.backgroundColor = "red"
+            }
+        })
+
+  
+    })
 
 
 }
@@ -241,4 +271,4 @@ playerSquares.forEach(square => {
 /*
 */
 
-export { ships , enemyAttackDisplay }
+export { ships , playerAttackDisplay, enemyAttackDisplay }

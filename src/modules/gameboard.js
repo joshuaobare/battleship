@@ -6,6 +6,7 @@ const Gameboard = function() {
     this.occupiedSpots = []
     this.playableSpots = []
     this.attackedSpots = []
+    this.hitSpots = []
 
     for(let x = 0;x<=9;x++) {
         for (let y = 0 ; y<=9 ;y++){
@@ -58,6 +59,7 @@ const Gameboard = function() {
                 }
             })
             myShip.hit(index)
+            this.hitSpots.push(coords)
 
                        
             return "Attack hit a ship"
