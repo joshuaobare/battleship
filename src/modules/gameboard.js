@@ -80,9 +80,9 @@ const Gameboard = function() {
         })
 
         if (decision) {
-            return "All ships have sank"
+            return true
         } else {
-            return "Some ships are afloat"
+            return false
         }
         
     }

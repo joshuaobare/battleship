@@ -22,7 +22,7 @@ const Player = function(name,gameboard) {
                     const randCoord = [getRandomInt(0,9),getRandomInt(0,9)]
                     this.gameboard.receiveAttack(randCoord)
                 }
-
+                console.log(randCoord)
             
             }
             coordChecker()
@@ -32,7 +32,7 @@ const Player = function(name,gameboard) {
         } else {
             this.gameboard.receiveAttack(coord)
         }
-        return `${this.name} attacked`
+        return `${this.name} attacked at ${coord}`
         
     }
 

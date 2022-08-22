@@ -24,7 +24,7 @@ test("gameboard determines whether all ships have sunk", () => {
     gameboard.receiveAttack([2,1])
     gameboard.receiveAttack([2,2])
 
-    expect(gameboard.allShipsSunk()).toBe("All ships have sank")
+    expect(gameboard.allShipsSunk()).toBeTruthy()
 
 })
 
@@ -38,6 +38,6 @@ test("gameboard determines whether all ships have sunk", () => {
     gameboard.receiveAttack([0,1])
     gameboard.receiveAttack([2,1])
     
-    expect(gameboard.allShipsSunk()).toBe("Some ships are afloat")
+    expect(gameboard.allShipsSunk()).toBeFalsy()
 
 })

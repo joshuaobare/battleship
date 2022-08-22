@@ -1,9 +1,8 @@
 /* eslint-disable no-empty */
+import {Ship} from './ship'
 import { gameLoop } from "./controller"
 
-const Player = require("./player")
-const Gameboard = require("./gameboard")
-const Ship = require("./ship")
+
 
 const pbSection = document.querySelector("#player-board")
 const cbSection = document.querySelector("#computer-board")
@@ -22,8 +21,12 @@ function createPlayerGrid() {
         div.className = "pb-grid-item"
         pgridContainer.appendChild(div)
     }
+
+     
     pbSection.appendChild(pgridContainer)
     idGrids(".pb-grid-item")
+    const playerSquares = document.querySelectorAll(".pb-grid-item")
+    populatePlayerBoard(playerSquares)
     
 }
 function orientationToggle() {
@@ -134,7 +137,7 @@ playerSquares.addEventListener("click", (e) => {
 
 })*/
 
-function populatePlayerBoard(){
+function populatePlayerBoard(playerSquares){
     
 
     ships.forEach((ship) => {
@@ -169,32 +172,38 @@ function createShips(e){
         case 0:
             patrol = new Ship("patrol",coords,orientation)
             ships.push(patrol)
-            populatePlayerBoard()
+            populatePlayerBoard(playerSquares)
             break
         case 1:
             submarine = new Ship("submarine",coords,orientation)
             ships.push(submarine)
-            populatePlayerBoard()
+            populatePlayerBoard(playerSquares)
             break
         case 2:
             destroyer = new Ship("destroyer",coords,orientation)
             ships.push(destroyer)
-            populatePlayerBoard()
+            populatePlayerBoard(playerSquares)
             break
         case 3:
             battleship = new Ship("battleship",coords,orientation)
             ships.push(battleship)
-            populatePlayerBoard()
+            populatePlayerBoard(playerSquares)
             break
         case 4:
             carrier = new Ship("carrier",coords,orientation)
             ships.push(carrier)
-            populatePlayerBoard()
+            populatePlayerBoard(playerSquares)
             break
         default:
-            gameLoop()
+            
+
             break
     }
+        if (count === 5) {
+            createPlayerGrid()
+            createEnemyGrid()
+            gameLoop()
+        }
                
 
         
@@ -211,8 +220,8 @@ playerSquares.forEach(square => {
 
 
 
+
 /*
-createPlayerGrid()
-createEnemyGrid()*/
+*/
 
 export { ships }
