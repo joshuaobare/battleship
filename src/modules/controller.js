@@ -26,3 +26,10 @@ console.table(patrol.isSunk())
 
 const player = new Player("Player 1",computerBoard)
 const computer = new Player("computer",playerBoard)
+
+const gameLoop = (() => {
+    
+    
+
+
+})()
