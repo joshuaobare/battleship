@@ -5,6 +5,7 @@ const Gameboard = function() {
     this.ships = []
     this.occupiedSpots = []
     this.playableSpots = []
+    this.attackedSpots = []
 
     for(let x = 0;x<=9;x++) {
         for (let y = 0 ; y<=9 ;y++){
@@ -25,6 +26,7 @@ const Gameboard = function() {
     }
 
     this.receiveAttack = (coords) => {
+        this.attackedSpots.push(coords)
 
         const index = this.playableSpots.findIndex((element) => {
             return JSON.stringify(element) == JSON.stringify(coords)

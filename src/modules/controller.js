@@ -1,4 +1,4 @@
-import { ships } from "./DOM"
+import { ships , enemyAttackDisplay } from "./DOM"
 import { getRandomInt , Player } from "./player"
 import { Gameboard } from "./gameboard"
 import { Ship } from "./ship"
@@ -49,6 +49,7 @@ function gameLoop() {
             //console.log(e.target.dataset.coord)
             console.log(player.attackOpponent(JSON.parse(e.target.dataset.coord)))
             console.log(computer.attackOpponent())
+            enemyAttackDisplay(computerBoard,e)
             console.log(computerBoard)
         })
     })

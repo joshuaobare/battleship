@@ -155,10 +155,27 @@ function populatePlayerBoard(playerSquares){
 
        
     })
+}
 
-    
+function enemyAttackDisplay(obj,e) {
+    const attackedSpots = obj.attackedSpots
+    const occupiedSpots = obj.occupiedSpots
 
+    const coordCheck1 = attackedSpots.some((coord) => {
+        
+       return e.target.dataset.coord.toString() === `[${coord.toString()}]`
+    })
+    const coordCheck2 = occupiedSpots.some((coord) => {
+        return e.target.dataset.coord.toString() === `[${coord.toString()}]`
+    })
+    console.log(coordCheck1,coordCheck2)
+    console.log(e.target.dataset.coord)
 
+    if(coordCheck1 && coordCheck2) {
+        e.target.style.backgroundColor = "red"
+    } else if ((coordCheck1) && !(coordCheck2)) {
+        e.target.style.backgroundColor = "blue"
+    }
 
 
 }
@@ -224,4 +241,4 @@ playerSquares.forEach(square => {
 /*
 */
 
-export { ships }
+export { ships , enemyAttackDisplay }
