@@ -41,3 +41,13 @@ test("gameboard determines whether all ships have sunk", () => {
     expect(gameboard.allShipsSunk()).toBeFalsy()
 
 })
+
+test("gameboard should prevent placing ships on occupied spots" , ()=> {
+    const ship = new Ship("patrol",[0,0],"V")
+    const ship2 = new Ship("patrol",[0,0],"V")
+    const gameboard = new Gameboard()
+    gameboard.placeShip(ship)
+    expect(() => {
+        gameboard.placeShip(ship2)
+    }).toThrow("Ship coordinates are taken")
+})

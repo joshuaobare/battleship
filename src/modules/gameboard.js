@@ -15,12 +15,27 @@ const Gameboard = function() {
     }
     
     this.placeShip = (ship) => {
+
+        const coordCheck = ship.coord.some((coord) => {
+           return this.occupiedSpots.some(coords => {
+                if (coord.toString() === coords.toString()) {
+                    
+                    return true
+                }
+            })
+        })
         
-        this.ships.push(ship)
-        ship.coord.forEach(point => {
+        if (coordCheck) {
+            throw "Ship coordinates are taken"
+        } else {
+            this.ships.push(ship)
+            ship.coord.forEach(point => {
             this.occupiedSpots.push(point)
             
         })
+        }
+        
+        
 
         
         
