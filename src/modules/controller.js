@@ -5,8 +5,8 @@ import { Ship } from "./ship";
 
 const options = ["V", "H"];
 const computerShips = [];
-const playerBoard = new Gameboard();
-const computerBoard = new Gameboard();
+const playerBoard = new Gameboard("computerboard");
+const computerBoard = new Gameboard("playerboard");
 const patrol = new Ship(
   "patrol",
   [getRandomInt(0, 9), getRandomInt(0, 9)],
@@ -67,8 +67,11 @@ function gameLoop() {
       "click",
       (e) => {
         //console.log(e.target.dataset.coord)
+        winnerChecker()
         console.log(player.attackOpponent(JSON.parse(e.target.dataset.coord)));
+        winnerChecker()
         console.log(computer.attackOpponent());
+        winnerChecker()
         playerAttackDisplay(computerBoard, e);
         enemyAttackDisplay(playerBoard);
         console.log(computerBoard);
@@ -77,16 +80,21 @@ function gameLoop() {
     );
   });
 
-  if (playerBoard.allShipsSunk() || computerBoard.allShipsSunk()) {
-    alert("Game's UP!");
-
-    if (playerBoard.allShipsSunk()) {
-      alert("Computer WINS");
-    } else {
-      alert("Human WINS");
-    }
-  }
+  
 }
+
+function winnerChecker(){
+    if (playerBoard.allShipsSunk() || computerBoard.allShipsSunk()) {
+        alert("Game's UP!");
+    
+        if (playerBoard.allShipsSunk()) {
+          alert("Computer WINS");
+        } else {
+          alert("Human WINS");
+        }
+      }
+}
+
 
 function rcPlaceShip(gameboard, ship) {
   try {

@@ -1,6 +1,7 @@
 //const Ship = require("./ship")
 
-const Gameboard = function () {
+const Gameboard = function (name) {
+  this.name = name
   this.missedHit = [];
   this.ships = [];
   this.occupiedSpots = [];
@@ -48,7 +49,7 @@ const Gameboard = function () {
       throw "Ship coordinates are taken";
     } else if (!playableSpotCheck) {
       throw "Ship coordinates are out of bounds";
-    } else if (proximityCheck) {
+    } else if (proximityCheck && this.name.toString().toUpperCase() == "PLAYERBOARD" ) {
         throw "Ship too close"
     } else {
       this.ships.push(ship);
