@@ -31,7 +31,7 @@ h1 {
 }
 .gameboards {
   display: flex;
-  margin-top: 20px;
+  margin-top: 160px;
   justify-items: center;
   align-items: center;
 }
