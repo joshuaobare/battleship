@@ -10,6 +10,7 @@ const placeShipSection = document.querySelector("#placeShips")
 let ships = []
 let occupiedSpots = []
 let count = 0
+let playableSpots = []
 
 function createPlayerGrid() {
     const pgridContainer = document.createElement("div")
@@ -103,6 +104,7 @@ function idGrids(selector) {
     for(let x = 0;x<=9;x++) {
         for (let y = 0 ; y<=9 ;y++){
             myArr.push([y,x])
+            playableSpots.push([y,x])
         }
     }
 
@@ -210,16 +212,44 @@ function enemyAttackDisplay(obj) {
 
 }
 
+function validateCoords(ship) {
+
+    const playableSpotCheck = ship.coord.every((coord) => {
+        return playableSpots.some(coords => {
+             if (coord.toString() === coords.toString()) {                     
+                 return true
+             }
+         })
+    })  
+    console.log(playableSpotCheck)
+    if(!playableSpotCheck){
+        count--
+        return false
+    } else {
+        return true
+    }
+
+}
+
 function createShips(e){
     const orientation = document.querySelector('input[name="orientation"]:checked').value
     const coords = JSON.parse(e.target.dataset.coord)
     let patrol,submarine, destroyer, battleship, carrier
+    
 
     switch(count){
         case 0:
             patrol = new Ship("patrol",coords,orientation)
-            ships.push(patrol)
-            populatePlayerBoard(playerSquares)
+            
+            if(!validateCoords(patrol)){
+                count +=1
+                return
+            } else {
+                ships.push(patrol)
+                populatePlayerBoard(playerSquares)
+            }
+            
+            
             break
         case 1:
             submarine = new Ship("submarine",coords,orientation)

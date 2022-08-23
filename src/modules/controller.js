@@ -40,40 +40,9 @@ function gameLoop() {
     })
 
     computerShips.forEach(ship => {
-       /* try {
-            computerBoard.placeShip(ship)
-        } catch{
-            try{
-                const newShip = new Ship (ship.name,[getRandomInt(0,9),getRandomInt(0,9)],options[Math.floor(Math.random()*options.length)])
-                computerBoard.placeShip(newShip)
-            }catch{
-                try {
-                    const newShip = new Ship (ship.name,[getRandomInt(0,9),getRandomInt(0,9)],options[Math.floor(Math.random()*options.length)])
-                    computerBoard.placeShip(newShip)
-                }catch{
-                    
-                  try {
-                    const newShip = new Ship (ship.name,[getRandomInt(0,9),getRandomInt(0,9)],options[Math.floor(Math.random()*options.length)])
-                    computerBoard.placeShip(newShip)
-                  } catch {
-                    try {
-                        const newShip = new Ship (ship.name,[getRandomInt(0,9),getRandomInt(0,9)],options[Math.floor(Math.random()*options.length)])
-                        computerBoard.placeShip(newShip)
-                      } catch {
-                        const newShip = new Ship (ship.name,[getRandomInt(0,9),getRandomInt(0,9)],options[Math.floor(Math.random()*options.length)])
-                        computerBoard.placeShip(newShip)
-                    }
-                }
-                }
-            }
-        } */
+       
         rcPlaceShip(computerBoard,ship)
-
-        
-
-
-
-        
+   
     })
     console.log(computerBoard)
    
