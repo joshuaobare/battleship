@@ -6,6 +6,7 @@ const pbSection = document.querySelector("#player-board");
 const cbSection = document.querySelector("#computer-board");
 const placeShipSection = document.querySelector("#placeShips");
 const shipName = document.createElement("div");
+const maindialog = document.querySelector("#main-dialog")
 shipName.id = "shipName";
 shipName.textContent = `Where will you place your patrol boat?`;
 
@@ -264,6 +265,7 @@ function createShips(e) {
       break;
   }
   if (count === 4) {
+    maindialog.close()
     createPlayerGrid();
     createEnemyGrid();
     gameLoop();
@@ -283,7 +285,6 @@ playerSquares.forEach((square) => {
   );
 });
 
-/*
- */
 
-export { ships, playerAttackDisplay, enemyAttackDisplay };
+
+export { ships, playerAttackDisplay, enemyAttackDisplay, placeShipGrid };
