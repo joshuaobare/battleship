@@ -1,125 +1,99 @@
 //const Ship = require("./ship")
 
-const Gameboard = function() {
-    this.missedHit = []
-    this.ships = []
-    this.occupiedSpots = []
-    this.playableSpots = []
-    this.attackedSpots = []
-    this.hitSpots = []
+const Gameboard = function () {
+  this.missedHit = [];
+  this.ships = [];
+  this.occupiedSpots = [];
+  this.playableSpots = [];
+  this.attackedSpots = [];
+  this.hitSpots = [];
 
-    for(let x = 0;x<=9;x++) {
-        for (let y = 0 ; y<=9 ;y++){
-            this.playableSpots.push([y,x])
+  for (let x = 0; x <= 9; x++) {
+    for (let y = 0; y <= 9; y++) {
+      this.playableSpots.push([y, x]);
+    }
+  }
+
+  this.placeShip = (ship) => {
+    const occupiedSpotCheck = ship.coord.some((coord) => {
+      return this.occupiedSpots.some((coords) => {
+        if (coord.toString() === coords.toString()) {
+          return true;
         }
-    }
-    
-    this.placeShip = (ship) => {
+      });
+    });
 
-        const occupiedSpotCheck = ship.coord.some((coord) => {
-           return this.occupiedSpots.some(coords => {
-                if (coord.toString() === coords.toString()) {                    
-                    return true
-                }
-            })
-        })
-
-        const playableSpotCheck = ship.coord.every((coord) => {
-            return this.playableSpots.some(coords => {
-                 if (coord.toString() === coords.toString()) {                     
-                     return true
-                 }
-             })
-         })
-        
-        if (occupiedSpotCheck) {
-            throw "Ship coordinates are taken"
-        } else if (!playableSpotCheck) {
-            throw "Ship coordinates are out of bounds"
-        }      
-        else {
-            this.ships.push(ship)
-            ship.coord.forEach(point => {
-            this.occupiedSpots.push(point)
-            
-        })
+    const playableSpotCheck = ship.coord.every((coord) => {
+      return this.playableSpots.some((coords) => {
+        if (coord.toString() === coords.toString()) {
+          return true;
         }
-        
-        
+      });
+    });
 
-        
-        
+    if (occupiedSpotCheck) {
+      throw "Ship coordinates are taken";
+    } else if (!playableSpotCheck) {
+      throw "Ship coordinates are out of bounds";
+    } else {
+      this.ships.push(ship);
+      ship.coord.forEach((point) => {
+        this.occupiedSpots.push(point);
+      });
     }
+  };
 
-    this.receiveAttack = (coords) => {
-        this.attackedSpots.push(coords)
+  this.receiveAttack = (coords) => {
+    this.attackedSpots.push(coords);
 
-        const index = this.playableSpots.findIndex((element) => {
-            return JSON.stringify(element) == JSON.stringify(coords)
-        })
-        this.playableSpots.splice(index,1)
-        
-               
-        const coordCheck = this.occupiedSpots.some((val) => {
-            if (val.toString() === coords.toString()) {
-                return true
-            }
-        })
+    const index = this.playableSpots.findIndex((element) => {
+      return JSON.stringify(element) == JSON.stringify(coords);
+    });
+    this.playableSpots.splice(index, 1);
 
+    const coordCheck = this.occupiedSpots.some((val) => {
+      if (val.toString() === coords.toString()) {
+        return true;
+      }
+    });
 
-               
-        if (coordCheck)  {
+    if (coordCheck) {
+      const myShip = this.ships.find((ship) => {
+        return ship.coord.find((coord) => {
+          return coord.toString() === coords.toString();
+        });
+      });
 
-            const myShip = this.ships.find((ship) => {
-
-                return ship.coord.find((coord) => {
-                    return coord.toString() === coords.toString()
-                })
-
-            })
-            
-            const index = myShip.coord.findIndex((val) => {
-                if(val.toString() === coords.toString()){
-                    return true
-                }
-            })
-            myShip.hit(index)
-            this.hitSpots.push(coords)
-
-                       
-            return "Attack hit a ship"
-
-        } else {
-            this.missedHit.push(coords)
-            
-            return "Attack missed"
-            
-        }             
-
-    }
-
-    this.allShipsSunk = () => {
-
-        const decision = this.ships.every(ship => {
-
-           if (ship.isSunk()) {
-               return true
-           }
-            
-        })
-
-        if (decision) {
-            return true
-        } else {
-            return false
+      const index = myShip.coord.findIndex((val) => {
+        if (val.toString() === coords.toString()) {
+          return true;
         }
-        
+      });
+      myShip.hit(index);
+      this.hitSpots.push(coords);
+
+      return "Attack hit a ship";
+    } else {
+      this.missedHit.push(coords);
+
+      return "Attack missed";
     }
+  };
 
+  this.allShipsSunk = () => {
+    const decision = this.ships.every((ship) => {
+      if (ship.isSunk()) {
+        return true;
+      }
+    });
 
-    
-}
-
+    if (decision) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+};
 
 /*const ship = new Ship(3,[[2,2],[3,2],[2,5],[3,5]])
 console.log(ship.coord)
@@ -141,6 +115,4 @@ gameboard.receiveAttack([2,5])
 //console.log(gameboard.playableSpots)
 //console.log(gameboard.allShipsSunk())*/
 
-
-export {Gameboard}
-
+export { Gameboard };
