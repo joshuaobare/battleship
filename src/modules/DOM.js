@@ -253,23 +253,49 @@ function createShips(e){
             break
         case 1:
             submarine = new Ship("submarine",coords,orientation)
-            ships.push(submarine)
-            populatePlayerBoard(playerSquares)
+            
+            if(!validateCoords(submarine)){
+                count +=1
+                return
+            } else {
+                ships.push(submarine)
+                populatePlayerBoard(playerSquares)
+            }
+
             break
         case 2:
             destroyer = new Ship("destroyer",coords,orientation)
-            ships.push(destroyer)
-            populatePlayerBoard(playerSquares)
+            
+            if(!validateCoords(destroyer)){
+                count +=1
+                return
+            } else {
+                ships.push(destroyer)
+                populatePlayerBoard(playerSquares)
+            }
+
             break
         case 3:
             battleship = new Ship("battleship",coords,orientation)
-            ships.push(battleship)
-            populatePlayerBoard(playerSquares)
+            
+            if(!validateCoords(battleship)){
+                count +=1
+                return
+            } else {
+                ships.push(battleship)
+                populatePlayerBoard(playerSquares)
+            }
+
             break
         case 4:
             carrier = new Ship("carrier",coords,orientation)
-            ships.push(carrier)
-            populatePlayerBoard(playerSquares)
+            if(!validateCoords(carrier)){
+                count +=1
+                return
+            } else {
+                ships.push(carrier)
+                populatePlayerBoard(playerSquares)
+            }
             break
         default:
             
