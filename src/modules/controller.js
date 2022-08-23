@@ -1,4 +1,9 @@
-import { ships, playerAttackDisplay, enemyAttackDisplay } from "./DOM";
+import {
+  ships,
+  playerAttackDisplay,
+  enemyAttackDisplay,
+  winnerChecker,
+} from "./DOM";
 import { getRandomInt, Player } from "./player";
 import { Gameboard } from "./gameboard";
 import { Ship } from "./ship";
@@ -7,6 +12,7 @@ const options = ["V", "H"];
 const computerShips = [];
 const playerBoard = new Gameboard("computerboard");
 const computerBoard = new Gameboard("playerboard");
+
 const patrol = new Ship(
   "patrol",
   [getRandomInt(0, 9), getRandomInt(0, 9)],
@@ -34,19 +40,6 @@ const carrier = new Ship(
 );
 computerShips.push(patrol, submarine, destroyer, battleship, carrier);
 
-/*
-
-if(playerBoard.allShipsSunk() || computerBoard.allShipsSunk() ) {
-    alert("Game's UP!")
-
-    if(playerBoard.allShipsSunk()) {
-        alert("Computer WINS")
-    } else {
-        alert("Human WINS")
-    }
-}
-*/
-
 const player = new Player("Player 1", computerBoard);
 const computer = new Player("computer", playerBoard);
 
@@ -60,41 +53,26 @@ function gameLoop() {
   computerShips.forEach((ship) => {
     rcPlaceShip(computerBoard, ship);
   });
-  console.log(computerBoard);
 
   enemySquares.forEach((square) => {
     square.addEventListener(
       "click",
       (e) => {
-        //console.log(e.target.dataset.coord)
-        winnerChecker()
-        console.log(player.attackOpponent(JSON.parse(e.target.dataset.coord)));
-        winnerChecker()
-        console.log(computer.attackOpponent());
-        winnerChecker()
+        winnerChecker(playerBoard, computerBoard);
+        player.attackOpponent(JSON.parse(e.target.dataset.coord));
+        winnerChecker(playerBoard, computerBoard);
+        computer.attackOpponent();
+        winnerChecker(playerBoard, computerBoard);
         playerAttackDisplay(computerBoard, e);
         enemyAttackDisplay(playerBoard);
-        console.log(computerBoard);
+        winnerChecker(playerBoard, computerBoard);
       },
       { once: true }
     );
   });
-
-  
 }
 
-function winnerChecker(){
-    if (playerBoard.allShipsSunk() || computerBoard.allShipsSunk()) {
-        alert("Game's UP!");
-    
-        if (playerBoard.allShipsSunk()) {
-          alert("Computer WINS");
-        } else {
-          alert("Human WINS");
-        }
-      }
-}
-
+// rcPlaceShip recursively tries to find a valid spot to place the ships
 
 function rcPlaceShip(gameboard, ship) {
   try {
@@ -106,7 +84,7 @@ function rcPlaceShip(gameboard, ship) {
         [getRandomInt(0, 9), getRandomInt(0, 9)],
         options[Math.floor(Math.random() * options.length)]
       );
-      console.log(newShip);
+
       gameboard.placeShip(newShip);
     } catch {
       rcPlaceShip(gameboard, ship);

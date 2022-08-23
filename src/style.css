@@ -1,38 +1,60 @@
+@font-face {
+  font-family: baufra;
+  src: url(./fonts/BaufraBold.ttf);
+}
+@font-face {
+  font-family: stencil;
+  src: url(./fonts/Stencil.ttf);
+}
+
 body {
   margin: 0;
   overflow: hidden;
 }
 
 header {
-  background-color: black;
-  color: white;
+  background-color: #d92121;
+  color: black;
   text-align: center;
-  padding: 2px;
+
+  font-family: stencil, sans-serif;
+  letter-spacing: 0.25em;
+  font-size: 3em;
 }
 .gameboards {
   display: flex;
-  margin-top: 100px;
+  margin-top: 20px;
+  justify-items: center;
+  align-items: center;
 }
 
-/*.player-board {
-    background-color: blue;
-
+.playerName {
+  text-align: center;
+  font-size: 2em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 200;
+  color: black;
 }
-
+/*
 .computer-board {
     background-color: maroon;
 }*/
 
 .player-board,
 .computer-board {
-  width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pbSection-item,
 .cbSection-item {
-  width: 260px;
-  height: 260px;
+  width: 350px;
+  height: 350px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
@@ -49,15 +71,80 @@ header {
 .pb-grid-item,
 .cb-grid-item,
 .ps-grid-item {
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   border: 0.1px solid black;
+}
+.placeShips {
+  width: 370px;
+  height: 460px;
+  font-family: baufra;
+}
+
+fieldset {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 340px;
+}
+
+legend {
+  text-align: center;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shipName {
+  padding: 2px;
+  text-align: center;
+  margin: 5px 5px;
+}
+
+.winner {
+  width: 300px;
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.winner-dialog-button {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.winner-identity {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 300;
+}
+
+.game-over {
+  font-size: 2em;
+  font-family: baufra;
+}
+
+.game-over,
+.winner-identity {
+  text-align: center;
+}
+
+button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #d92121;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 footer {
   background-color: black;
   color: white;
   position: fixed;
+  font-family: baufra;
+  font-size: 0.75em;
   bottom: 0;
   width: 100vw;
   text-align: center;

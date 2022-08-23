@@ -1,7 +1,5 @@
-//const Ship = require("./ship")
-
 const Gameboard = function (name) {
-  this.name = name
+  this.name = name;
   this.missedHit = [];
   this.ships = [];
   this.occupiedSpots = [];
@@ -33,24 +31,35 @@ const Gameboard = function (name) {
     });
 
     const proximityCheck = ship.coord.some((coord) => {
-        return this.occupiedSpots.some((coords) => {
-          if (([coord[0],coord[1]].toString() === [coords[0]+1,coords[1]].toString()) ||
-          ([coord[0],coord[1]].toString() === [coords[0],coords[1]+1].toString()) ||
-          ([coord[0],coord[1]].toString() === [coords[0]+1,coords[1]+1].toString()) ||
-          ([coord[0],coord[1]].toString() === [coords[0]-1,coords[1]].toString()) ||
-          ([coord[0],coord[1]].toString() === [coords[0],coords[1]-1].toString()) ||
-          ([coord[0],coord[1]].toString() === [coords[0]-1,coords[1]-1].toString())) {
-            return true;
-          }
-        });
+      return this.occupiedSpots.some((coords) => {
+        if (
+          [coord[0], coord[1]].toString() ===
+            [coords[0] + 1, coords[1]].toString() ||
+          [coord[0], coord[1]].toString() ===
+            [coords[0], coords[1] + 1].toString() ||
+          [coord[0], coord[1]].toString() ===
+            [coords[0] + 1, coords[1] + 1].toString() ||
+          [coord[0], coord[1]].toString() ===
+            [coords[0] - 1, coords[1]].toString() ||
+          [coord[0], coord[1]].toString() ===
+            [coords[0], coords[1] - 1].toString() ||
+          [coord[0], coord[1]].toString() ===
+            [coords[0] - 1, coords[1] - 1].toString()
+        ) {
+          return true;
+        }
       });
+    });
 
     if (occupiedSpotCheck) {
       throw "Ship coordinates are taken";
     } else if (!playableSpotCheck) {
       throw "Ship coordinates are out of bounds";
-    } else if (proximityCheck && this.name.toString().toUpperCase() == "PLAYERBOARD" ) {
-        throw "Ship too close"
+    } else if (
+      proximityCheck &&
+      this.name.toString().toUpperCase() == "PLAYERBOARD"
+    ) {
+      throw "Ship too close";
     } else {
       this.ships.push(ship);
       ship.coord.forEach((point) => {
@@ -110,25 +119,5 @@ const Gameboard = function (name) {
     }
   };
 };
-
-/*const ship = new Ship(3,[[2,2],[3,2],[2,5],[3,5]])
-console.log(ship.coord)
-function findIndex(x,y) {
-
-    const index  = y.findIndex
-
-} 
-
-const ship = new Ship(4)
-const shipCoords = [[2,2],[3,2],[2,5],[3,5]]
-const gameboard = new Gameboard(ship,shipCoords)
-//console.log(gameboard.playableSpots)
-
-gameboard.receiveAttack([3,5])
-gameboard.receiveAttack([2,2])
-gameboard.receiveAttack([3,2])
-gameboard.receiveAttack([2,5])
-//console.log(gameboard.playableSpots)
-//console.log(gameboard.allShipsSunk())*/
 
 export { Gameboard };

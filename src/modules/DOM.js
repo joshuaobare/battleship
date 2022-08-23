@@ -6,9 +6,17 @@ const pbSection = document.querySelector("#player-board");
 const cbSection = document.querySelector("#computer-board");
 const placeShipSection = document.querySelector("#placeShips");
 const shipName = document.createElement("div");
-const maindialog = document.querySelector("#main-dialog")
+const maindialog = document.querySelector("#main-dialog");
+shipName.className = "shipName";
 shipName.id = "shipName";
 shipName.textContent = `Where will you place your patrol boat?`;
+const winnerdialog = document.querySelector("#winner-dialog");
+const winner = document.querySelector("#winner-identity");
+const restartBtn = document.querySelector("#restart");
+const playerName = document.createElement("div");
+const computerName = document.createElement("div");
+playerName.className = "playerName";
+computerName.className = "playerName";
 
 let ships = [];
 let occupiedSpots = [];
@@ -25,8 +33,10 @@ function createPlayerGrid() {
     div.className = "pb-grid-item";
     pgridContainer.appendChild(div);
   }
-
+  playerName.textContent = "Player";
   pbSection.appendChild(pgridContainer);
+
+  pbSection.appendChild(playerName);
   idGrids(".pb-grid-item");
   const playerSquares = document.querySelectorAll(".pb-grid-item");
   populatePlayerBoard(playerSquares);
@@ -38,6 +48,8 @@ function orientationToggle() {
   legend.textContent = "Orientation";
   const toggle1 = document.createElement("div");
   const toggle2 = document.createElement("div");
+  toggle1.className = "toggle";
+  toggle2.className = "toggle";
   const vToggle = document.createElement("input");
   const hToggle = document.createElement("input");
   const label1 = document.createElement("label");
@@ -93,7 +105,9 @@ function createEnemyGrid() {
 
     cgridContainer.appendChild(div);
   }
+  computerName.textContent = "Computer";
   cbSection.appendChild(cgridContainer);
+  cbSection.appendChild(computerName);
   idGrids(".cb-grid-item");
 }
 
@@ -141,11 +155,9 @@ function playerAttackDisplay(obj, e) {
   const coordCheck2 = occupiedSpots.some((coord) => {
     return e.target.dataset.coord.toString() === `[${coord.toString()}]`;
   });
-  console.log(coordCheck1, coordCheck2);
-  console.log(e.target.dataset.coord);
 
   if (coordCheck1 && coordCheck2) {
-    e.target.style.backgroundColor = "red";
+    e.target.style.backgroundColor = "#D92121";
   } else if (coordCheck1 && !coordCheck2) {
     e.target.style.backgroundColor = "lightskyblue";
   }
@@ -159,7 +171,6 @@ function enemyAttackDisplay(obj) {
   playerSquares.forEach((square) => {
     missedHits.forEach((coord) => {
       if (square.dataset.coord.toString() === `[${coord.toString()}]`) {
-        //console.log()
         square.style.backgroundColor = "lightskyblue";
       }
     });
@@ -168,7 +179,7 @@ function enemyAttackDisplay(obj) {
   playerSquares.forEach((square) => {
     hitSpots.forEach((coord) => {
       if (square.dataset.coord.toString() === `[${coord.toString()}]`) {
-        square.style.backgroundColor = "red";
+        square.style.backgroundColor = "#D92121";
       }
     });
   });
@@ -182,7 +193,7 @@ function validateCoords(ship) {
       }
     });
   });
-  console.log(playableSpotCheck);
+
   if (!playableSpotCheck) {
     count--;
     return false;
@@ -265,13 +276,12 @@ function createShips(e) {
       break;
   }
   if (count === 4) {
-    maindialog.close()
+    maindialog.close();
     createPlayerGrid();
     createEnemyGrid();
     gameLoop();
   }
 
-  console.log(ships);
   count += 1;
 }
 
@@ -285,6 +295,27 @@ playerSquares.forEach((square) => {
   );
 });
 
+function winnerChecker(playerBoard, computerBoard) {
+  if (playerBoard.allShipsSunk() || computerBoard.allShipsSunk()) {
+    winnerdialog.showModal();
 
+    if (playerBoard.allShipsSunk()) {
+      winner.textContent = "Computer Wins !";
+    } else {
+      winner.textContent = "Humanity Wins !";
+    }
+  }
+}
 
-export { ships, playerAttackDisplay, enemyAttackDisplay, placeShipGrid };
+restartBtn.addEventListener("click", () => {
+  winnerdialog.close();
+  location.reload();
+});
+
+export {
+  ships,
+  playerAttackDisplay,
+  enemyAttackDisplay,
+  placeShipGrid,
+  winnerChecker,
+};

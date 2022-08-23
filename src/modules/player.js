@@ -20,13 +20,12 @@ const Player = function (name, gameboard) {
           const randCoord = [getRandomInt(0, 9), getRandomInt(0, 9)];
           this.gameboard.receiveAttack(randCoord);
         }
-        console.log(randCoord);
       };
       coordChecker();
     } else {
       this.gameboard.receiveAttack(coord);
     }
-    return `${this.name} attacked at ${coord}`;
+    return `${this.name} attacked`;
   };
 };
 
@@ -37,5 +36,3 @@ function getRandomInt(max, min) {
 }
 
 export { getRandomInt, Player };
-
-//module.exports = Player
