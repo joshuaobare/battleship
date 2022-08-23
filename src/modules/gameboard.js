@@ -31,10 +31,25 @@ const Gameboard = function () {
       });
     });
 
+    const proximityCheck = ship.coord.some((coord) => {
+        return this.occupiedSpots.some((coords) => {
+          if (([coord[0],coord[1]].toString() === [coords[0]+1,coords[1]].toString()) ||
+          ([coord[0],coord[1]].toString() === [coords[0],coords[1]+1].toString()) ||
+          ([coord[0],coord[1]].toString() === [coords[0]+1,coords[1]+1].toString()) ||
+          ([coord[0],coord[1]].toString() === [coords[0]-1,coords[1]].toString()) ||
+          ([coord[0],coord[1]].toString() === [coords[0],coords[1]-1].toString()) ||
+          ([coord[0],coord[1]].toString() === [coords[0]-1,coords[1]-1].toString())) {
+            return true;
+          }
+        });
+      });
+
     if (occupiedSpotCheck) {
       throw "Ship coordinates are taken";
     } else if (!playableSpotCheck) {
       throw "Ship coordinates are out of bounds";
+    } else if (proximityCheck) {
+        throw "Ship too close"
     } else {
       this.ships.push(ship);
       ship.coord.forEach((point) => {

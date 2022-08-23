@@ -56,3 +56,13 @@ test("gameboard should prevent placing ships on spots out of its range", () => {
     gameboard.placeShip(ship);
   }).toThrow("Ship coordinates are out of bounds");
 });
+
+test("computer gameboard should prevent placing ships too close to each other", () => {
+  const ship = new Ship("carrier", [0, 0], "V");
+  const ship2 = new Ship("carrier", [1, 0], "V")
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship)
+  expect(() => {
+    gameboard.placeShip(ship2);
+  }).toThrow("Ship too close")
+})
