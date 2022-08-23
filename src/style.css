@@ -13,13 +13,21 @@ body {
 }
 
 header {
-  background-color: #d92121;
+  background-color: #D92121;
   color: black;
   text-align: center;
-
+  padding: 0px;
   font-family: stencil, sans-serif;
   letter-spacing: 0.25em;
   font-size: 3em;
+  position: fixed;
+  top:0;
+  width: 100vw;
+  height: 3em;
+}
+h1 {
+    padding: 0;
+    margin-top: 15px;
 }
 .gameboards {
   display: flex;
