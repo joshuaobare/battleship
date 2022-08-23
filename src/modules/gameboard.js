@@ -16,18 +16,28 @@ const Gameboard = function() {
     
     this.placeShip = (ship) => {
 
-        const coordCheck = ship.coord.some((coord) => {
+        const occupiedSpotCheck = ship.coord.some((coord) => {
            return this.occupiedSpots.some(coords => {
-                if (coord.toString() === coords.toString()) {
-                    
+                if (coord.toString() === coords.toString()) {                    
                     return true
                 }
             })
         })
+
+        const playableSpotCheck = ship.coord.every((coord) => {
+            return this.playableSpots.some(coords => {
+                 if (coord.toString() === coords.toString()) {                     
+                     return true
+                 }
+             })
+         })
         
-        if (coordCheck) {
+        if (occupiedSpotCheck) {
             throw "Ship coordinates are taken"
-        } else {
+        } else if (!playableSpotCheck) {
+            throw "Ship coordinates are out of bounds"
+        }      
+        else {
             this.ships.push(ship)
             ship.coord.forEach(point => {
             this.occupiedSpots.push(point)
