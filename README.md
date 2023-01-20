@@ -5,4 +5,5 @@ A take on the classic game of Battleship.
 
 ## Built with
 - Vanilla JS
-- jest
+- Jest
+- Webpack
